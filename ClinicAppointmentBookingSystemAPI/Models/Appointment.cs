@@ -14,12 +14,8 @@
         public string Status { get; set; }           // Scheduled, Completed, Cancelled
 
         // Administrative Information
-        public string InsuranceProvider { get; set; }
-        public string PolicyNumber { get; set; }
         public string PaymentMethod { get; set; }
-        public string EmergencyContactName { get; set; }
-        public string EmergencyContactPhone { get; set; }
-        public string EmergencyContactRelationship { get; set; }
+      
 
         // Optional Enhancements
         public string UploadedDocuments { get; set; } // file path or URL

@@ -12,14 +12,13 @@
 
         public string Gender { get; set; }
         public string ContactInfo { get; set; }
-        public string Disease { get; set; }
+        public string ChiefComplaint { get; set; }
 
-        // Medical Information
+        // Medical Informations
         public string BloodType { get; set; }
         public string Allergies { get; set; }
         public string CurrentMedications { get; set; }
-        public string PastMedicalHistory { get; set; }
-        public string FamilyMedicalHistory { get; set; }
+        public string MedicalHistory { get; set; }
 
         // Navigation property
         public ICollection<Appointment> Appointments { get; set; }

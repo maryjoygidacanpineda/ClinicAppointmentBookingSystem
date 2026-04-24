@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClinicCare Pro - Appointment System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏥</text></svg>">
+</head>
+<body>
+    <!-- Floating Medical Elements -->
+    <div class="medical-floaters">
+        <div class="floater"></div>
+        <div class="floater"></div>
+        <div class="floater"></div>
+    </div>
+
+    <!-- HOMEPAGE -->
+    <div id="homePage">
+        <div class="container">
+            <h1>ClinicCare Pro</h1>
+            <div class="tagline">Book your medical appointments online<br>Fast • Secure • Reliable</div>
+            <button class="primary-btn" onclick="goToBooking()">📅 Book Appointment</button>
+        </div>
+    </div>
+
+    <!-- BOOKING FORM -->
+    <div id="bookingPage" class="hidden">
+        <div class="container">
+            <h2>Book Appointment</h2>
+
+            <label>Full Name *</label>
+            <input type="text" id="fullName" placeholder="Enter full name" required>
+
+            <label>Birth Date</label>
+            <input type="date" id="birthdate">
+            <input type="text" id="age" placeholder="Age (auto-calculated)" readonly>
+
+            <label>Gender</label>
+            <select id="gender">
+                <option value="">Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <label>Contact</label>
+            <input type="text" id="contactInfo" placeholder="Phone/Email">
+
+            <label>Chief Complaint</label>
+            <input type="text" id="disease" placeholder="Describe your symptoms">
+
+            <h3>Medical Information</h3>
+            <input type="text" id="bloodType" placeholder="Blood Type (e.g., A+, O-)">
+            <input type="text" id="allergies" placeholder="Allergies">
+            <input type="text" id="medications" placeholder="Current Medications">
+            <textarea id="history" placeholder="Medical History (optional)"></textarea>
+
+            <h3>Appointment Details</h3>
+            <label>Preferred Date & Time *</label>
+            <input type="datetime-local" id="appointmentDateTime" required>
+
+            <input type="text" value="General Consultation" readonly style="background: #f0fdf4; color: #166534;">
+            <input type="text" value="Dr. MJ Ramos" readonly style="background: #eff6ff; color: #1e40af;">
+
+            <h3>Payment Method</h3>
+            <select id="paymentMethod">
+                <option>Cash</option>
+                <option>Card</option>
+                <option>Insurance</option>
+            </select>
+
+            <button class="primary-btn" onclick="confirmBooking()">✅ Confirm Booking</button>
+            <button class="secondary-btn" onclick="goHome()">🏠 Back to Home</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
