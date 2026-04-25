@@ -2,24 +2,32 @@
 {
     public class Appointment
     {
-        public int AppointmentId { get; set; }   // PK
-        public int PatientId { get; set; }       // FK
-        public Patient Patient { get; set; }
+        public int AppointmentId { get; set; }
 
-        public int DoctorId { get; set; }        // FK
+        // Patient info (from HTML)
+        public string FullName { get; set; }
+        public DateTime Birthdate { get; set; }
+        public int Age { get; set; }
+        public string Gender { get; set; }
+        public string Contact { get; set; }
+        public string Disease { get; set; }
+
+        // Medical
+        public string BloodType { get; set; }
+        public string Allergies { get; set; }
+        public string Medications { get; set; }
+        public string History { get; set; }
+
+        // Appointment
+        public DateTime DateTime { get; set; }
+        public string ServiceDepartment { get; set; }
+        public string Status { get; set; }
+
+        // FK to Doctors table
+        public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
 
-        public DateTime DateTime { get; set; }
-        public string ServiceDepartment { get; set; } // e.g. "General Consultation"
-        public string Status { get; set; }           // Scheduled, Completed, Cancelled
-
-        // Administrative Information
+        // Payment
         public string PaymentMethod { get; set; }
-      
-
-        // Optional Enhancements
-        public string UploadedDocuments { get; set; } // file path or URL
-        public string DoctorNotes { get; set; }
-        public string VisitHistory { get; set; }      // serialized list of past visits
     }
 }

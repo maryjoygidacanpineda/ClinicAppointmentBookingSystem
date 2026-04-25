@@ -1,4 +1,6 @@
-﻿namespace ClinicAppointmentBookingSystemAPI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace ClinicAppointmentBookingSystemAPI.Models
 {
     public class Doctor
     {
@@ -6,7 +8,8 @@
         public string Name { get; set; }
         public string Specialization { get; set; } // e.g. "General Practitioner"
 
-        // Navigation property
-        public ICollection<Appointment> Appointments { get; set; }
+
+        [JsonIgnore] // 👈 ADD THIS
+        public List<Appointment>? Appointments { get; set; }
     }
 }

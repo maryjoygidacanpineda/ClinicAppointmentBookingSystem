@@ -1,8 +1,7 @@
-﻿using ClinicAppointmentBookingSystemAPI.Models;
-using Microsoft.AspNetCore.Mvc;
-using ClinicAppointmentBookingSystemAPI.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
+using ClinicAppointmentBookingSystemAPI.Data;
+using ClinicAppointmentBookingSystemAPI.Models;
 
 namespace ClinicAppointmentBookingSystemAPI.Controllers
 {
@@ -17,52 +16,68 @@ namespace ClinicAppointmentBookingSystemAPI.Controllers
             _context = context;
         }
 
+        // GET ALL
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Appointment>>> GetAppointments()
+        public async Task<IActionResult> GetAppointments()
         {
-            return await _context.Appointments
-                .Include(a => a.Patient)
+            var data = await _context.Appointments
                 .Include(a => a.Doctor)
                 .ToListAsync();
+
+            return Ok(data);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Appointment>> GetAppointment(int id)
-        {
-            var appointment = await _context.Appointments
-                .Include(a => a.Patient)
-                .Include(a => a.Doctor)
-                .FirstOrDefaultAsync(a => a.AppointmentId == id);
-
-            if (appointment == null) return NotFound();
-            return appointment;
-        }
-
+        // POST (BOOK APPOINTMENT)
         [HttpPost]
-        public async Task<ActionResult<Appointment>> CreateAppointment(Appointment appointment)
+        public async Task<IActionResult> CreateAppointment(Appointment appointment)
         {
+            var doctor = await _context.Doctors.FirstOrDefaultAsync();
+
+            if (doctor == null)
+                return BadRequest("No doctor found");
+
+            appointment.DoctorId = doctor.DoctorId;
+            appointment.Status = "Scheduled";
+
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetAppointment), new { id = appointment.AppointmentId }, appointment);
+
+            return Ok(new
+            {
+                message = "Appointment saved successfully",
+                appointmentId = appointment.AppointmentId
+            });
         }
 
+        // UPDATE STATUS
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAppointment(int id, Appointment appointment)
+        public async Task<IActionResult> Update(int id, Appointment updated)
         {
-            if (id != appointment.AppointmentId) return BadRequest();
-            _context.Entry(appointment).State = EntityState.Modified;
+            var appt = await _context.Appointments.FindAsync(id);
+
+            if (appt == null)
+                return NotFound();
+
+            appt.Status = updated.Status;
+            appt.PaymentMethod = updated.PaymentMethod;
+
             await _context.SaveChangesAsync();
-            return NoContent();
+            return Ok("Updated");
         }
 
+        // DELETE
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAppointment(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var appointment = await _context.Appointments.FindAsync(id);
-            if (appointment == null) return NotFound();
-            _context.Appointments.Remove(appointment);
+            var appt = await _context.Appointments.FindAsync(id);
+
+            if (appt == null)
+                return NotFound();
+
+            _context.Appointments.Remove(appt);
             await _context.SaveChangesAsync();
-            return NoContent();
+
+            return Ok("Deleted");
         }
     }
 }

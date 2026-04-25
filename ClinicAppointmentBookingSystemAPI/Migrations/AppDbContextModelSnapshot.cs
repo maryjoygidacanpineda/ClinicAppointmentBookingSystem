@@ -31,34 +31,8 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("DoctorNotes")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("EmergencyContactName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("EmergencyContactPhone")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("EmergencyContactRelationship")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("InsuranceProvider")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("PatientId")
-                        .HasColumnType("int");
 
                     b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PolicyNumber")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -127,7 +101,7 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("CurrentMedications")
+                    b.Property<string>("Medications")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -135,7 +109,7 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("FamilyMedicalHistory")
+                    b.Property<string>("History")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -146,12 +120,6 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<string>("PastMedicalHistory")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("PatientId");
 
                     b.ToTable("Patients");
                 });
@@ -166,9 +134,7 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+
 
                     b.Property<string>("Username")
                         .IsRequired()
