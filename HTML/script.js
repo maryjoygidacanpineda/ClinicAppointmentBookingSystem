@@ -8,15 +8,16 @@ const elements = {
     gender: document.getElementById("gender"),
     contactInfo: document.getElementById("contactInfo"),
     disease: document.getElementById("disease"),
-    bloodType: document.getElementById("bloodType"),
+    history: document.getElementById("history"),
     allergies: document.getElementById("allergies"),
     medications: document.getElementById("medications"),
     doctorSelect: document.getElementById("doctorSelect"),
     appointmentDateTime: document.getElementById("appointmentDateTime"),
-    paymentMethod: document.getElementById("paymentMethod")
+    paymentMethod: document.getElementById("paymentMethod"),
+    status: document.getElementById("status")
 };
+const doctorSelect = document.getElementById("doctorSelect");
 
-// Navigation
 function goToBooking() {
     document.getElementById("homePage").classList.add("hidden");
     document.getElementById("bookingPage").classList.remove("hidden");
@@ -29,35 +30,34 @@ function goHome() {
     document.getElementById("homePage").classList.remove("hidden");
 }
 
-// Load Doctors from Database
+
+// Load doctors when page opens or booking opens
 async function loadDoctors() {
     try {
-        const response = await fetch(`${API_BASE}/doctors`);
-        const doctors = await response.json();
-        
-        populateDoctorSelect(doctors);
-    } catch (error) {
-        console.warn('Using demo doctors:', error);
-        populateDoctorSelect([
-            { id: 1, name: "Dr. John Smith", specialty: "General Medicine" },
-            { id: 2, name: "Dr. Sarah Johnson", specialty: "Cardiologist" },
-            { id: 3, name: "Dr. Michael Chen", specialty: "Pediatrician" },
-            { id: 4, name: "Dr. Emily Davis", specialty: "Dermatologist" },
-            { id: 5, name: "Dr. David Wilson", specialty: "Orthopedist" }
-        ]);
-    }
-}
+        const res = await fetch(`${API_BASE}/doctors`);
+        const doctors = await res.json();
 
-// Populate Doctor Dropdown
-function populateDoctorSelect(doctors) {
-    elements.doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
-    
-    doctors.forEach(doctor => {
-        const option = document.createElement('option');
-        option.value = doctor.id;
-        option.textContent = `${doctor.name} - ${doctor.specialty}`;
-        elements.doctorSelect.appendChild(option);
-    });
+        // clear old options
+        doctorSelect.innerHTML = `<option value="">Select Doctor</option>`;
+
+        doctors.forEach(doc => {
+            const option = document.createElement("option");
+
+            option.value = doc.doctorId || doc.DoctorId;
+
+            const name = doc.name || doc.Name;
+            const spec = doc.specialization || doc.Specialization;
+
+            option.textContent = `${name} - ${spec}`;
+
+            doctorSelect.appendChild(option);
+        });
+
+    } catch (err) {
+        console.error("Error loading doctors:", err);
+        doctorSelect.innerHTML = `<option>Error loading doctors</option>`;
+    }
+
 }
 
 // Auto-calculate Age
@@ -76,72 +76,74 @@ elements.birthdate.addEventListener("change", function() {
     }
 });
 
-// Submit Booking
 async function confirmBooking() {
-    // Validation
-    const required = [elements.fullName, elements.doctorSelect, elements.appointmentDateTime];
-    for (let field of required) {
-        if (!field.value) {
-            field.focus();
-            alert(`Please fill: ${field.previousElementSibling?.textContent || 'Required field'}`);
-            return;
-        }
+    const btn = document.querySelector(".btn-primary");
+    if (btn.disabled) return;
+
+    if (!elements.fullName.value || !elements.contactInfo.value || !elements.doctorSelect.value) {
+        alert("❌ Please fill required fields");
+        return;
     }
 
-    const appointmentData = {
-        patientName: elements.fullName.value,
-        birthdate: elements.birthdate.value,
-        age: elements.age.value || 0,
-        gender: elements.gender.value,
-        contact: elements.contactInfo.value,
-        disease: elements.disease.value,
-        bloodType: elements.bloodType.value,
-        allergies: elements.allergies.value,
-        medications: elements.medications.value,
-        doctorId: parseInt(elements.doctorSelect.value),
-        appointmentDateTime: elements.appointmentDateTime.value,
-        paymentMethod: elements.paymentMethod.value,
-        status: "Scheduled"
+
+    const appointmentData= {
+        FullName: elements.fullName.value,
+        ContactInfo: elements.contactInfo.value,
+        DoctorId: parseInt(elements.doctorSelect.value),
+        Birthdate: elements.birthdate.value,
+        Age: elements.age.value || 0,
+        Gender: elements.gender.value,
+        Disease: elements.disease.value,
+        History: elements.history.value,
+        Allergies: elements.allergies.value,
+        Medication: elements.medications.value,
+        AppointmentDateTime: elements.appointmentDateTime.value,
+        PaymentMethod: elements.paymentMethod.value,
+        Status: elements.status.value
     };
 
     try {
-        const btn = event.target;
-        btn.textContent = "Booking...";
-        btn.disabled = true;
+         btn.textContent = "Booking...";
+         btn.disabled = true;
 
-        const response = await fetch(`${API_BASE}/appointments`, {
+        const res = await fetch(`${API_BASE}/appointments`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(appointmentData)
         });
 
-        if (response.ok) {
+        if (res.ok){
             alert("✅ Appointment booked successfully!\n\nConfirmation sent to your contact.");
             clearForm();
             goHome();
         } else {
-            throw new Error("Server error");
+           const err = await res.text();
+            console.error(err);
+            alert("❌ Failed to book appointment");
         }
     } catch (error) {
         console.error(error);
-        alert("❌ Booking failed. Please try again.");
+        alert("❌ Server error. Please try again.");
     } finally {
-        const btn = event.target;
-        btn.textContent = "Submit";
+        btn.textContent = "Confirm Booking";
         btn.disabled = false;
     }
 }
-
 function clearForm() {
     Object.values(elements).forEach(el => {
-        if (el.tagName !== 'SELECT') el.value = '';
-        else if (el.id !== 'paymentMethod') el.value = '';
+        if (el && el.tagName !== "SELECT") {
+            el.value = "";
+        }
     });
-    elements.paymentMethod.value = 'Cash';
+
+    elements.paymentMethod.value = "Cash";
+    elements.status.value = "Scheduled";
 }
 
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    const today = new Date().toISOString().split('T')[0];
+// INIT
+window.onload = loadDoctors;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date().toISOString().split("T")[0];
     elements.appointmentDateTime.min = today;
 });

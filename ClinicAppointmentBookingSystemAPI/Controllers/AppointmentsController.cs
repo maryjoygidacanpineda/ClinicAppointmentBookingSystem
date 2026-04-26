@@ -16,15 +16,10 @@ namespace ClinicAppointmentBookingSystemAPI.Controllers
             _context = context;
         }
 
-        // GET ALL
         [HttpGet]
-        public async Task<IActionResult> GetAppointments()
+        public async Task<ActionResult<IEnumerable<Doctor>>> GetDoctors()
         {
-            var data = await _context.Appointments
-                .Include(a => a.Doctor)
-                .ToListAsync();
-
-            return Ok(data);
+            return await _context.Doctors.ToListAsync();
         }
 
         // POST (BOOK APPOINTMENT)

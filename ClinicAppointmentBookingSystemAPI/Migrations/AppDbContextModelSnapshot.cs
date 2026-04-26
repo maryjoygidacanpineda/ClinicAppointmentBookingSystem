@@ -31,32 +31,57 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Allergies")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("Birthdate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Age")
+                       .HasColumnType("int");
+
+                    b.Property<string>("ContactInfo")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Medication")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Disease")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("History")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("ServiceDepartment")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UploadedDocuments")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
-                    b.Property<string>("VisitHistory")
+                    b.Property<string>("History")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("AppointmentId");
 
                     b.HasIndex("DoctorId");
-
-                    b.HasIndex("PatientId");
 
                     b.ToTable("Appointments");
                 });
@@ -80,49 +105,6 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("ClinicAppointmentBookingSystemAPI.Models.Patient", b =>
-                {
-                    b.Property<int>("PatientId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Allergies")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("Birthdate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("BloodType")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ContactInfo")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Medications")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Disease")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("History")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.ToTable("Patients");
-                });
 
             modelBuilder.Entity("ClinicAppointmentBookingSystemAPI.Models.User", b =>
                 {
@@ -133,8 +115,6 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -153,23 +133,11 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClinicAppointmentBookingSystemAPI.Models.Patient", "Patient")
-                        .WithMany("Appointments")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Doctor");
 
-                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("ClinicAppointmentBookingSystemAPI.Models.Doctor", b =>
-                {
-                    b.Navigation("Appointments");
-                });
-
-            modelBuilder.Entity("ClinicAppointmentBookingSystemAPI.Models.Patient", b =>
                 {
                     b.Navigation("Appointments");
                 });

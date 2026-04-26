@@ -16,7 +16,7 @@ namespace ClinicAppointmentBookingSystemAPI.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Appointment>()
-                .HasOne(a => a.Doctor)
+                .HasOne<Doctor>()
                 .WithMany(d => d.Appointments)
                 .HasForeignKey(a => a.DoctorId)
                 .OnDelete(DeleteBehavior.Cascade);

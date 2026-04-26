@@ -22,6 +22,7 @@ namespace ClinicAppointmentBookingSystemAPI.Controllers
         {
             return await _context.Doctors.ToListAsync();
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateDoctor(Doctor doctor)
         {
