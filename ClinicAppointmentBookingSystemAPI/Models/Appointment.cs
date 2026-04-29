@@ -18,7 +18,7 @@
         public string History { get; set; }
 
         // Appointment
-        public DateTime DateTime { get; set; }
+        public DateTime Date { get; set; }
         public string Status { get; set; }
 
         // FK to Doctors table

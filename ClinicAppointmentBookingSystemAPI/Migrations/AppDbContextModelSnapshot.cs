@@ -25,8 +25,8 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("datetime(6)");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("date(6)");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
@@ -36,7 +36,7 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("Birthdate")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("date(6)");
 
                     b.Property<int>("Age")
                        .HasColumnType("int");
