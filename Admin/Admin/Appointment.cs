@@ -17,14 +17,11 @@ namespace Admin
         {
             InitializeComponent();
             LoadDoctors();
-            LoadStatusCombo();
 
-            // Attach events
+            dgvAppointments.DataSource = ConnectDB.GetAllAppointments();
+
             dgvAppointments.CellClick += dgvAppointments_CellClick;
             cbDoctor.SelectedIndexChanged += cbDoctor_SelectedIndexChanged;
-
-            // ✅ Load all appointments by default
-            dgvAppointments.DataSource = ConnectDB.GetAllAppointments();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -45,13 +42,6 @@ namespace Admin
             cbDoctor.DisplayMember = "FullName";
             cbDoctor.ValueMember = "DoctorId";
         }
-        private void LoadStatusCombo()
-        {
-            cbStatus.Items.Clear();
-            cbStatus.Items.Add("Scheduled");
-            cbStatus.Items.Add("Completed");
-            cbStatus.Items.Add("Cancelled");
-        }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -63,21 +53,10 @@ namespace Admin
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dgvAppointments.Rows[e.RowIndex];
-
-                object dateValue = row.Cells["DateTime"].Value;
-                if (dateValue == DBNull.Value || string.IsNullOrWhiteSpace(dateValue.ToString()))
-                {
-                    tbDateandTime.Text = ""; // show empty
-                }
-                else
-                {
-                    tbDateandTime.Text = Convert.ToDateTime(dateValue).ToString("yyyy-MM-dd HH:mm:ss");
-                }
-
-
-                tbFullname.Text = row.Cells["FullName"].Value.ToString();
-                cbStatus.SelectedItem = row.Cells["Status"].Value.ToString();
-                tbDisease.Text = row.Cells["Disease"].Value.ToString();
+                tbFullname.Text = row.Cells["FullName"].Value?.ToString();
+                tbDisease.Text = row.Cells["Disease"].Value?.ToString();
+                cbStatus.SelectedItem = row.Cells["Status"].Value?.ToString();
+                tbDateandTime.Text = row.Cells["DateTime"].Value?.ToString();
             }
         }
 
@@ -96,29 +75,12 @@ namespace Admin
             if (dgvAppointments.SelectedRows.Count > 0)
             {
                 int appointmentId = Convert.ToInt32(dgvAppointments.SelectedRows[0].Cells["AppointmentId"].Value);
+                string newStatus = cbStatus.SelectedItem?.ToString();
 
-                string newDateTime = tbDateandTime.Text;
-                string newFullName = tbFullname.Text;
-                string newStatus = cbStatus.SelectedItem.ToString();
-                string newDisease = tbDisease.Text;
+                // ✅ Update only the Status
+                ConnectDB.UpdateStatus(appointmentId, newStatus);
 
-                using (MySqlConnection conn = ConnectDB.OpenConnection())
-                {
-                    string query = @"UPDATE appointments 
-                             SET DateTime=@dateTime, FullName=@fullName, Status=@status, Disease=@disease
-                             WHERE AppointmentId=@id";
-
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@dateTime", newDateTime);
-                    cmd.Parameters.AddWithValue("@fullName", newFullName);
-                    cmd.Parameters.AddWithValue("@status", newStatus);
-                    cmd.Parameters.AddWithValue("@disease", newDisease);
-                    cmd.Parameters.AddWithValue("@id", appointmentId);
-
-                    cmd.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Appointment updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Status updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Refresh DataGridView
                 if (cbDoctor.SelectedValue != null)
@@ -131,13 +93,13 @@ namespace Admin
                     dgvAppointments.DataSource = ConnectDB.GetAllAppointments();
                 }
 
-                // ✅ Re-select the updated row
+                // ✅ Reselect updated row
                 foreach (DataGridViewRow row in dgvAppointments.Rows)
                 {
                     if (Convert.ToInt32(row.Cells["AppointmentId"].Value) == appointmentId)
                     {
                         row.Selected = true;
-                        dgvAppointments.CurrentCell = row.Cells[0]; // move cursor to first cell
+                        dgvAppointments.CurrentCell = row.Cells[0];
                         break;
                     }
                 }

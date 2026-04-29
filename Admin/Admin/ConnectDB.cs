@@ -35,11 +35,11 @@ namespace Admin
             }
             return conn;
         }
-        public static DataTable GetDoctors()
+        public static DataTable GetAllAppointments()
         {
             using (MySqlConnection conn = OpenConnection())
             {
-                string query = "SELECT DoctorId, Name FROM doctors";
+                string query = "SELECT * FROM appointments";
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -62,18 +62,6 @@ namespace Admin
             }
         }
 
-        public static DataTable GetAllAppointments()
-        {
-            using (MySqlConnection conn = OpenConnection())
-            {
-                string query = "SELECT * FROM appointments";
-                MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                return dt;
-            }
-        }
-
         public static DataTable SearchAppointments(string keyword)
         {
             using (MySqlConnection conn = OpenConnection())
@@ -89,31 +77,29 @@ namespace Admin
             }
         }
 
-        // ✅ Update multiple fields
-        public static void UpdateAppointment(int appointmentId, string dateTime, string fullName, string status, string disease)
+        public static DataTable GetDoctors()
         {
             using (MySqlConnection conn = OpenConnection())
             {
-                string query = @"UPDATE appointments 
-                                 SET DateTime=@dateTime, FullName=@fullName, Status=@status, Disease=@disease
-                                 WHERE AppointmentId=@id";
+                string query = "SELECT DoctorId, Name FROM doctors";
+                MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
 
+        public static void UpdateStatus(int appointmentId, string status)
+        {
+            using (MySqlConnection conn = OpenConnection())
+            {
+                string query = "UPDATE appointments SET Status=@status WHERE AppointmentId=@id";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
-
-                // Handle DateTime safely
-                DateTime parsedDate;
-                if (DateTime.TryParse(dateTime, out parsedDate) && parsedDate > DateTime.MinValue)
-                    cmd.Parameters.AddWithValue("@dateTime", parsedDate);
-                else
-                    cmd.Parameters.AddWithValue("@dateTime", DBNull.Value);
-
-                cmd.Parameters.AddWithValue("@fullName", fullName);
                 cmd.Parameters.AddWithValue("@status", status);
-                cmd.Parameters.AddWithValue("@disease", disease);
                 cmd.Parameters.AddWithValue("@id", appointmentId);
-
                 cmd.ExecuteNonQuery();
             }
         }
+
     }
 }
