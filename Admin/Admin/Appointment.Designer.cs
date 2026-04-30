@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,8 +38,8 @@
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.dgvAppointments = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnMenu = new Guna.UI2.WinForms.Guna2Button();
+            this.side = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.btnExit = new Guna.UI2.WinForms.Guna2Button();
@@ -48,14 +49,19 @@
             this.btnUpdate = new Guna.UI2.WinForms.Guna2Button();
             this.tbDisease = new Guna.UI2.WinForms.Guna2TextBox();
             this.tbFullname = new Guna.UI2.WinForms.Guna2TextBox();
-            this.tbDateandTime = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSchedule = new Guna.UI2.WinForms.Guna2Button();
+            this.btnComplete = new Guna.UI2.WinForms.Guna2Button();
+            this.sidetransition1 = new System.Windows.Forms.Timer(this.components);
+            this.btnadd = new Guna.UI2.WinForms.Guna2Button();
+            this.dtpDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
-            this.guna2Panel2.SuspendLayout();
+            this.side.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbSearch
@@ -71,7 +77,7 @@
             this.tbSearch.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbSearch.Location = new System.Drawing.Point(834, 119);
+            this.tbSearch.Location = new System.Drawing.Point(826, 58);
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.PlaceholderText = "";
             this.tbSearch.SelectedText = "";
@@ -90,19 +96,18 @@
             this.cbStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cbStatus.ItemHeight = 30;
-            this.cbStatus.Location = new System.Drawing.Point(234, 94);
+            this.cbStatus.Location = new System.Drawing.Point(259, 33);
             this.cbStatus.Name = "cbStatus";
             this.cbStatus.Size = new System.Drawing.Size(166, 36);
             this.cbStatus.TabIndex = 5;
-    
             // 
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.MidnightBlue;
             this.guna2Panel1.Controls.Add(this.dgvAppointments);
-            this.guna2Panel1.Location = new System.Drawing.Point(3, 216);
+            this.guna2Panel1.Location = new System.Drawing.Point(3, 152);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1056, 329);
+            this.guna2Panel1.Size = new System.Drawing.Size(917, 329);
             this.guna2Panel1.TabIndex = 6;
             // 
             // dgvAppointments
@@ -131,7 +136,7 @@
             this.dgvAppointments.Location = new System.Drawing.Point(4, 3);
             this.dgvAppointments.Name = "dgvAppointments";
             this.dgvAppointments.RowHeadersVisible = false;
-            this.dgvAppointments.Size = new System.Drawing.Size(1049, 323);
+            this.dgvAppointments.Size = new System.Drawing.Size(908, 323);
             this.dgvAppointments.TabIndex = 0;
             this.dgvAppointments.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvAppointments.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -155,6 +160,7 @@
             this.dgvAppointments.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvAppointments.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.dgvAppointments.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAppointments_CellClick);
+            this.dgvAppointments.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAppointments_CellContentClick);
             // 
             // btnSearch
             // 
@@ -167,36 +173,37 @@
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.Location = new System.Drawing.Point(993, 127);
+            this.btnSearch.Location = new System.Drawing.Point(985, 66);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(25, 23);
             this.btnSearch.TabIndex = 7;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // guna2Button2
+            // btnMenu
             // 
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button2.Image")));
-            this.guna2Button2.ImageSize = new System.Drawing.Size(35, 40);
-            this.guna2Button2.Location = new System.Drawing.Point(0, -1);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(44, 37);
-            this.guna2Button2.TabIndex = 8;
+            this.btnMenu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnMenu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnMenu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnMenu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnMenu.FillColor = System.Drawing.Color.Transparent;
+            this.btnMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnMenu.ForeColor = System.Drawing.Color.White;
+            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
+            this.btnMenu.ImageSize = new System.Drawing.Size(35, 40);
+            this.btnMenu.Location = new System.Drawing.Point(0, -1);
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(44, 37);
+            this.btnMenu.TabIndex = 8;
+            this.btnMenu.Click += new System.EventHandler(this.btnMenu_Click);
             // 
-            // guna2Panel2
+            // side
             // 
-            this.guna2Panel2.Controls.Add(this.guna2Button4);
-            this.guna2Panel2.Controls.Add(this.btnLogout);
-            this.guna2Panel2.Location = new System.Drawing.Point(38, 3);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(123, 37);
-            this.guna2Panel2.TabIndex = 9;
+            this.side.Controls.Add(this.guna2Button4);
+            this.side.Controls.Add(this.btnLogout);
+            this.side.Location = new System.Drawing.Point(38, 3);
+            this.side.Name = "side";
+            this.side.Size = new System.Drawing.Size(2, 37);
+            this.side.TabIndex = 9;
             // 
             // guna2Button4
             // 
@@ -258,7 +265,7 @@
             this.cbDoctor.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbDoctor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cbDoctor.ItemHeight = 30;
-            this.cbDoctor.Location = new System.Drawing.Point(598, 122);
+            this.cbDoctor.Location = new System.Drawing.Point(590, 61);
             this.cbDoctor.Name = "cbDoctor";
             this.cbDoctor.Size = new System.Drawing.Size(165, 36);
             this.cbDoctor.TabIndex = 11;
@@ -267,16 +274,16 @@
             // guna2HtmlLabel1
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(38, 72);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(61, 22);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(73, 15);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(26, 15);
             this.guna2HtmlLabel1.TabIndex = 12;
-            this.guna2HtmlLabel1.Text = "Date nad Time";
+            this.guna2HtmlLabel1.Text = "Date";
             // 
             // guna2HtmlLabel2
             // 
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(613, 102);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(605, 41);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(35, 15);
             this.guna2HtmlLabel2.TabIndex = 13;
@@ -293,7 +300,7 @@
             this.btnUpdate.FillColor = System.Drawing.Color.Transparent;
             this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnUpdate.ForeColor = System.Drawing.Color.White;
-            this.btnUpdate.Location = new System.Drawing.Point(443, 122);
+            this.btnUpdate.Location = new System.Drawing.Point(463, 52);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(50, 45);
             this.btnUpdate.TabIndex = 14;
@@ -312,7 +319,7 @@
             this.tbDisease.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbDisease.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbDisease.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbDisease.Location = new System.Drawing.Point(225, 160);
+            this.tbDisease.Location = new System.Drawing.Point(250, 99);
             this.tbDisease.Name = "tbDisease";
             this.tbDisease.PlaceholderText = "";
             this.tbDisease.SelectedText = "";
@@ -332,37 +339,17 @@
             this.tbFullname.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbFullname.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbFullname.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbFullname.Location = new System.Drawing.Point(25, 160);
+            this.tbFullname.Location = new System.Drawing.Point(50, 99);
             this.tbFullname.Name = "tbFullname";
             this.tbFullname.PlaceholderText = "";
             this.tbFullname.SelectedText = "";
             this.tbFullname.Size = new System.Drawing.Size(194, 39);
             this.tbFullname.TabIndex = 16;
             // 
-            // tbDateandTime
-            // 
-            this.tbDateandTime.AutoRoundedCorners = true;
-            this.tbDateandTime.BorderColor = System.Drawing.Color.Navy;
-            this.tbDateandTime.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tbDateandTime.DefaultText = "";
-            this.tbDateandTime.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.tbDateandTime.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.tbDateandTime.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.tbDateandTime.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.tbDateandTime.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbDateandTime.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.tbDateandTime.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbDateandTime.Location = new System.Drawing.Point(25, 91);
-            this.tbDateandTime.Name = "tbDateandTime";
-            this.tbDateandTime.PlaceholderText = "";
-            this.tbDateandTime.SelectedText = "";
-            this.tbDateandTime.Size = new System.Drawing.Size(194, 39);
-            this.tbDateandTime.TabIndex = 17;
-            // 
             // guna2HtmlLabel3
             // 
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(38, 143);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(58, 82);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(45, 15);
             this.guna2HtmlLabel3.TabIndex = 18;
@@ -371,7 +358,7 @@
             // guna2HtmlLabel4
             // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(246, 139);
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(271, 78);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(41, 15);
             this.guna2HtmlLabel4.TabIndex = 19;
@@ -380,7 +367,7 @@
             // guna2HtmlLabel5
             // 
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(246, 73);
+            this.guna2HtmlLabel5.Location = new System.Drawing.Point(270, 14);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(33, 15);
             this.guna2HtmlLabel5.TabIndex = 20;
@@ -389,23 +376,114 @@
             // guna2HtmlLabel6
             // 
             this.guna2HtmlLabel6.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel6.Location = new System.Drawing.Point(450, 160);
+            this.guna2HtmlLabel6.Location = new System.Drawing.Point(472, 93);
             this.guna2HtmlLabel6.Name = "guna2HtmlLabel6";
             this.guna2HtmlLabel6.Size = new System.Drawing.Size(38, 15);
             this.guna2HtmlLabel6.TabIndex = 21;
             this.guna2HtmlLabel6.Text = "Update";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.AutoRoundedCorners = true;
+            this.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(945, 392);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(95, 36);
+            this.btnCancel.TabIndex = 22;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnSchedule
+            // 
+            this.btnSchedule.AutoRoundedCorners = true;
+            this.btnSchedule.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSchedule.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSchedule.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSchedule.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSchedule.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnSchedule.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
+            this.btnSchedule.ForeColor = System.Drawing.Color.White;
+            this.btnSchedule.Location = new System.Drawing.Point(945, 238);
+            this.btnSchedule.Name = "btnSchedule";
+            this.btnSchedule.Size = new System.Drawing.Size(95, 36);
+            this.btnSchedule.TabIndex = 23;
+            this.btnSchedule.Text = "Schedule";
+            this.btnSchedule.Click += new System.EventHandler(this.btnSchedule_Click);
+            // 
+            // btnComplete
+            // 
+            this.btnComplete.AutoRoundedCorners = true;
+            this.btnComplete.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnComplete.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnComplete.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnComplete.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnComplete.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnComplete.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
+            this.btnComplete.ForeColor = System.Drawing.Color.White;
+            this.btnComplete.Location = new System.Drawing.Point(945, 315);
+            this.btnComplete.Name = "btnComplete";
+            this.btnComplete.Size = new System.Drawing.Size(95, 36);
+            this.btnComplete.TabIndex = 24;
+            this.btnComplete.Text = "Complete";
+            this.btnComplete.Click += new System.EventHandler(this.btnComplete_Click);
+            // 
+            // sidetransition1
+            // 
+            this.sidetransition1.Tick += new System.EventHandler(this.sidetransition1_Tick);
+            // 
+            // btnadd
+            // 
+            this.btnadd.AutoRoundedCorners = true;
+            this.btnadd.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnadd.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnadd.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnadd.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnadd.FillColor = System.Drawing.Color.DarkKhaki;
+            this.btnadd.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
+            this.btnadd.ForeColor = System.Drawing.Color.White;
+            this.btnadd.Location = new System.Drawing.Point(945, 153);
+            this.btnadd.Name = "btnadd";
+            this.btnadd.Size = new System.Drawing.Size(95, 36);
+            this.btnadd.TabIndex = 25;
+            this.btnadd.Text = "Add Appointment";
+            this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
+            // 
+            // dtpDate
+            // 
+            this.dtpDate.AutoRoundedCorners = true;
+            this.dtpDate.Checked = true;
+            this.dtpDate.FillColor = System.Drawing.Color.White;
+            this.dtpDate.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Long;
+            this.dtpDate.Location = new System.Drawing.Point(46, 40);
+            this.dtpDate.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dtpDate.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(200, 36);
+            this.dtpDate.TabIndex = 26;
+            this.dtpDate.Value = new System.DateTime(2026, 4, 29, 12, 8, 17, 301);
+            // 
             // frmAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1062, 546);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(1062, 487);
+            this.Controls.Add(this.dtpDate);
+            this.Controls.Add(this.btnadd);
+            this.Controls.Add(this.btnComplete);
+            this.Controls.Add(this.btnSchedule);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.guna2HtmlLabel6);
             this.Controls.Add(this.guna2HtmlLabel5);
             this.Controls.Add(this.guna2HtmlLabel4);
             this.Controls.Add(this.guna2HtmlLabel3);
-            this.Controls.Add(this.tbDateandTime);
             this.Controls.Add(this.tbFullname);
             this.Controls.Add(this.tbDisease);
             this.Controls.Add(this.btnUpdate);
@@ -413,18 +491,18 @@
             this.Controls.Add(this.guna2HtmlLabel1);
             this.Controls.Add(this.cbDoctor);
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.guna2Panel2);
-            this.Controls.Add(this.guna2Button2);
+            this.Controls.Add(this.side);
+            this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.cbStatus);
             this.Controls.Add(this.tbSearch);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmAppointment";
-            this.Text = "Appointment";
+            this.Load += new System.EventHandler(this.frmAppointment_Load);
             this.guna2Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
-            this.guna2Panel2.ResumeLayout(false);
+            this.side.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -436,8 +514,8 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2DataGridView dgvAppointments;
         private Guna.UI2.WinForms.Guna2Button btnSearch;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2Button btnMenu;
+        private Guna.UI2.WinForms.Guna2Panel side;
         private Guna.UI2.WinForms.Guna2Button guna2Button4;
         private Guna.UI2.WinForms.Guna2Button btnLogout;
         private Guna.UI2.WinForms.Guna2Button btnExit;
@@ -447,10 +525,15 @@
         private Guna.UI2.WinForms.Guna2Button btnUpdate;
         private Guna.UI2.WinForms.Guna2TextBox tbDisease;
         private Guna.UI2.WinForms.Guna2TextBox tbFullname;
-        private Guna.UI2.WinForms.Guna2TextBox tbDateandTime;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
+        private Guna.UI2.WinForms.Guna2Button btnCancel;
+        private Guna.UI2.WinForms.Guna2Button btnSchedule;
+        private Guna.UI2.WinForms.Guna2Button btnComplete;
+        private System.Windows.Forms.Timer sidetransition1;
+        private Guna.UI2.WinForms.Guna2Button btnadd;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dtpDate;
     }
 }
