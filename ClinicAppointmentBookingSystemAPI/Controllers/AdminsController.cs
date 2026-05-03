@@ -7,46 +7,46 @@ namespace ClinicAppointmentBookingSystemAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class AdminsController : ControllerBase
     {
         private readonly AppDbContext _context;
 
         // Corrected constructor parameter
-        public UsersController(AppDbContext context)
+        public AdminsController(AppDbContext context)
         {
             _context = context;
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register(User user)
+        public async Task<IActionResult> Register(Admin admin)
         {
-            var exists = await _context.Users
-                .AnyAsync(u => u.Username == user.Username);
+            var exists = await _context.Admins
+                .AnyAsync(u => u.Username == admin.Username);
 
             if (exists)
                 return BadRequest("Username already exists");
 
-            _context.Users.Add(user);
+            _context.Admins.Add(admin);
             await _context.SaveChangesAsync();
 
             return Ok(new { message = "User registered successfully" });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] User login)
+        public async Task<IActionResult> Login([FromBody] Admin login)
         {
-            var user = await _context.Users
+            var admin = await _context.Admins
                 .FirstOrDefaultAsync(u =>
                     u.Username == login.Username &&
                     u.Password == login.Password);
 
-            if (user == null)
+            if (admin == null)
                 return Unauthorized(new { message = "Invalid credentials" });
 
             return Ok(new
             {
                 message = "Login successful",
-                userId = user.UserId,
-                username = user.Username
+                adminId = admin.AdminId,
+                username = admin.Username
             });
         }
     }

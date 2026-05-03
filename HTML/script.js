@@ -12,11 +12,11 @@ const elements = {
     allergies: document.getElementById("allergies"),
     medications: document.getElementById("medications"),
     doctorSelect: document.getElementById("doctorSelect"),
-    appointmentDateTime: document.getElementById("appointmentDateTime"),
+    appointmentDate: document.getElementById("appointmentDate"),
     paymentMethod: document.getElementById("paymentMethod"),
     status: document.getElementById("status")
 };
-const doctorSelect = document.getElementById("doctorSelect");
+const doctorId = parseInt(document.getElementById("doctorSelect").value, 10);
 
 function goToBooking() {
     document.getElementById("homePage").classList.add("hidden");
@@ -38,29 +38,30 @@ async function loadDoctors() {
         const doctors = await res.json();
 
         // clear old options
-        doctorSelect.innerHTML = `<option value="">Select Doctor</option>`;
+        elements.doctorSelect.innerHTML = `<option value="">Select Doctor</option>`;
 
         doctors.forEach(doc => {
             const option = document.createElement("option");
 
-            option.value = doc.doctorId || doc.DoctorId;
+            option.value = doc.doctorId || doc.doctorId ;
 
             const name = doc.name || doc.Name;
             const spec = doc.specialization || doc.Specialization;
 
             option.textContent = `${name} - ${spec}`;
 
-            doctorSelect.appendChild(option);
+            elements.doctorSelect.appendChild(option);
         });
 
     } catch (err) {
         console.error("Error loading doctors:", err);
-        doctorSelect.innerHTML = `<option>Error loading doctors</option>`;
+        elements.doctorSelect.innerHTML = `<option>Error loading doctors</option>`;
     }
 
 }
 
 // Auto-calculate Age
+if (elements.birthdate) {
 elements.birthdate.addEventListener("change", function() {
     if (this.value) {
         const birthDate = new Date(this.value);
@@ -75,6 +76,7 @@ elements.birthdate.addEventListener("change", function() {
         elements.age.value = age;
     }
 });
+}
 
 async function confirmBooking() {
     const btn = document.querySelector(".btn-primary");
@@ -85,11 +87,15 @@ async function confirmBooking() {
         return;
     }
 
+    if (isNaN(parseInt(elements.doctorSelect.value, 10))) {
+        alert("❌ Please select a doctor");
+        return;
+    }
 
     const appointmentData= {
         FullName: elements.fullName.value,
         ContactInfo: elements.contactInfo.value,
-        DoctorId: parseInt(elements.doctorSelect.value),
+        DoctorId: parseInt(elements.doctorSelect.value, 10),
         Birthdate: elements.birthdate.value,
         Age: elements.age.value || 0,
         Gender: elements.gender.value,
@@ -97,10 +103,12 @@ async function confirmBooking() {
         History: elements.history.value,
         Allergies: elements.allergies.value,
         Medication: elements.medications.value,
-        AppointmentDateTime: elements.appointmentDateTime.value,
+        AppointmentDate: elements.appointmentDate.value,
         PaymentMethod: elements.paymentMethod.value,
         Status: elements.status.value
-    };
+    }; 
+    
+    console.log(appointmentData);
 
     try {
          btn.textContent = "Booking...";
@@ -119,7 +127,7 @@ async function confirmBooking() {
         } else {
            const err = await res.text();
             console.error(err);
-            alert("❌ Failed to book appointment");
+            alert("❌ Failed: ");
         }
     } catch (error) {
         console.error(error);
@@ -145,5 +153,5 @@ window.onload = loadDoctors;
 
 document.addEventListener("DOMContentLoaded", () => {
     const today = new Date().toISOString().split("T")[0];
-    elements.appointmentDateTime.min = today;
+    elements.appointmentDate.min = today;
 });

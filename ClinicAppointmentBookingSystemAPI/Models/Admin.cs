@@ -1,8 +1,8 @@
 ﻿namespace ClinicAppointmentBookingSystemAPI.Models
 {
-    public class User
+    public class Admin
     {
-        public int UserId { get; set; }   // Primary Key
+        public int AdminId { get; set; }   // Primary Key
         public string Username { get; set; }
         public string Password { get; set; }
     }

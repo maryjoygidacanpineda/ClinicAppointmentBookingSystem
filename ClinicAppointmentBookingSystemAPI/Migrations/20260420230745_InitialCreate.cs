@@ -34,10 +34,10 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Admins",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    AdminId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Username = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -46,7 +46,7 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Admins", x => x.AdminId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -57,10 +57,10 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                     AppointmentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DoctorId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    AppointmentDate = table.Column<DateOnly>(type: "date", nullable: false),
                     FullName = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Birthdate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    Birthdate = table.Column<DateOnly>(type: "date", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     Gender = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -106,7 +106,7 @@ namespace ClinicAppointmentBookingSystemAPI.Migrations
                 name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Admins");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

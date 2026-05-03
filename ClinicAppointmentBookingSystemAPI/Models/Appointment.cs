@@ -1,4 +1,6 @@
-﻿namespace ClinicAppointmentBookingSystemAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ClinicAppointmentBookingSystemAPI.Models
 {
     public class Appointment
     {
@@ -6,7 +8,7 @@
 
         // Patient info (from HTML)
         public string FullName { get; set; }
-        public DateTime Birthdate { get; set; }
+        public DateOnly Birthdate { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
         public string ContactInfo { get; set; }
@@ -18,7 +20,8 @@
         public string History { get; set; }
 
         // Appointment
-        public DateTime Date { get; set; }
+  
+        public DateOnly AppointmentDate { get; set; }
         public string Status { get; set; }
 
         // FK to Doctors table

@@ -11,7 +11,7 @@ namespace ClinicAppointmentBookingSystemAPI.Data
 
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
