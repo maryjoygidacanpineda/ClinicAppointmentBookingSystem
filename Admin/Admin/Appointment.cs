@@ -144,9 +144,9 @@ namespace Admin
                 tbDisease.Text = row.Cells["disease"].Value?.ToString();
 
                 // Appointment Date (safe handling)
-                if (row.Cells["date"].Value != DBNull.Value)
+                if (row.Cells["AppointmentDate"].Value != DBNull.Value)
                 {
-                    DateTime apptDate = Convert.ToDateTime(row.Cells["date"].Value);
+                    DateTime apptDate = Convert.ToDateTime(row.Cells["AppointmentDate"].Value);
 
                     if (apptDate >= dtpDate.MinDate && apptDate <= dtpDate.MaxDate)
                         dtpDate.Value = apptDate;
@@ -214,6 +214,11 @@ namespace Admin
         }
 
         private void dgvAppointments_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
         {
 
         }

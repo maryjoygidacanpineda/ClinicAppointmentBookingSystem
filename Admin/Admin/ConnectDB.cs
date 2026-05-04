@@ -9,7 +9,7 @@ namespace Admin
     public class ConnectDB
     {
         private static readonly string connectionString =
-     "server=localhost;port=3306;user=root;password=;database=clinic_db;Allow Zero Datetime=True;Convert Zero Datetime=True;";
+     "server=localhost;port=3306;user=root;password=;database=clinic_db";
 
 
         public static MySqlConnection GetConnection()
@@ -113,12 +113,12 @@ namespace Admin
             string query = @"INSERT INTO appointments
                         (fullname, birthdate, age, gender, contactinfo, disease,
                          allergies, medication, history,
-                         datetime, doctorid,
+                         appoinmentdate, doctorid,
                          paymentmethod, status)
                         VALUES
                         (@fullname, @birthdate, @age, @gender, @contactinfo, @disease,
                          @allergies, @medication, @history,
-                         @datetime, @doctorid,
+                         @appointmentdate, @doctorid,
                          @paymentmethod, @status)";
 
             ExecuteQuery(query,
@@ -131,7 +131,7 @@ namespace Admin
                 new MySqlParameter("@allergies", allergies),
                 new MySqlParameter("@medication", medication),
                 new MySqlParameter("@history", history),
-                new MySqlParameter("@datetime", appointmentDate),
+                new MySqlParameter("@appointmentdate", appointmentDate),
                 new MySqlParameter("@doctorid", doctorId),
                 new MySqlParameter("@paymentmethod", paymentMethod),
                 new MySqlParameter("@status", status)
@@ -158,18 +158,18 @@ namespace Admin
             "Completed"
         };
         }
-        public static void UpdateAppointment(int appointmentId, string status, DateTime date, string disease)
+        public static void UpdateAppointment(int appointmentId, string status, DateTime appoinmentdate, string disease)
         {
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
                 string query = @"UPDATE appointments 
-                         SET status = @status, date = @date, disease = @disease
+                         SET status = @status, appointmentdate = @appointmentdate, disease = @disease
                          WHERE appointmentid = @appointmentid";
 
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@status", status);
-                cmd.Parameters.AddWithValue("@date", date);
+                cmd.Parameters.AddWithValue("@appointmentdate", appoinmentdate);
                 cmd.Parameters.AddWithValue("@disease", disease);
                 cmd.Parameters.AddWithValue("@appointmentid", appointmentId);
                 cmd.ExecuteNonQuery();

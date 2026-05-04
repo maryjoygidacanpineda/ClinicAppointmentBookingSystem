@@ -53,7 +53,7 @@ namespace Admin
             {
                 try
                 {
-                    string query = "SELECT COUNT(*) FROM users WHERE Username=@username AND Password=@password";
+                    string query = "SELECT COUNT(*) FROM admins WHERE Username=@username AND Password=@password";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         // ✅ Use .Text, not the control itself

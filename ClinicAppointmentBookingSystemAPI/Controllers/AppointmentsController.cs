@@ -26,13 +26,13 @@ namespace ClinicAppointmentBookingSystemAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAppointment(Appointment appointment)
         {
-            var doctor = await _context.Doctors.FirstOrDefaultAsync();
+            var doctor = await _context.Doctors.FirstOrDefaultAsync(d => d.DoctorId == appointment.DoctorId);
 
             if (doctor == null)
                 return BadRequest("No doctor found");
 
-            appointment.DoctorId = doctor.DoctorId;
-            appointment.Status = "Scheduled";
+            if (string.IsNullOrEmpty(appointment.Status))
+                appointment.Status = "Scheduled";
 
             _context.Appointments.Add(appointment);
             await _context.SaveChangesAsync();

@@ -16,7 +16,7 @@ const elements = {
     paymentMethod: document.getElementById("paymentMethod"),
     status: document.getElementById("status")
 };
-const doctorId = parseInt(document.getElementById("doctorSelect").value, 10);
+//const DoctorId = parseInt(document.getElementById("doctorSelect").value, 10);
 
 function goToBooking() {
     document.getElementById("homePage").classList.add("hidden");
@@ -43,10 +43,10 @@ async function loadDoctors() {
         doctors.forEach(doc => {
             const option = document.createElement("option");
 
-            option.value = doc.doctorId || doc.doctorId ;
+            option.value = doc.DoctorId || doc.doctorId ;
 
-            const name = doc.name || doc.Name;
-            const spec = doc.specialization || doc.Specialization;
+            const name = doc.Name || doc.name || doc.Name;
+            const spec = doc.Specialization || doc.specialization;
 
             option.textContent = `${name} - ${spec}`;
 
